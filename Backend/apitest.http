@@ -1,0 +1,55 @@
+// home route
+###
+GET http://localhost:5000
+
+// get all category
+###
+GET http://localhost:5000/api/v1/category
+
+// get all parent category
+###
+GET http://localhost:5000/api/v1/category/parent-category
+
+// single create category
+### 
+POST http://localhost:5000/api/v1/category
+Content-Type: application/json
+
+{
+  "name": "root",
+  "description": "root",
+  "image": null,
+  "orderBy": "1",
+  "bestSelling": "0"
+}
+
+// single get category
+### 
+GET http://localhost:5000/api/v1/category/6446a2bf33d92256ae916c2e
+
+// single update category
+### 
+PUT http://localhost:5000/api/v1/category/6446a39d33d92256ae916c32
+Content-Type: application/json
+
+{
+  "name": "ROOT",
+  "description": "root",
+  "root": "root",
+  "image": "image",
+  "orderBy": "1",
+  "bestSelling": "0"
+}
+
+// single delete category
+### 
+DELETE http://localhost:5000/api/v1/category/6463d54dcad6c888dc411a58
+
+// single image delete
+### 
+DELETE http://localhost:5000/api/v1/image-upload
+Content-Type: application/json
+
+{
+  "key": "uploads/ef8695b2-fd7b-46c6-9c48-934f098e11ff-2.png"
+}
