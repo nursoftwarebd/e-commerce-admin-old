@@ -1,0 +1,94 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+import CategoryTable from "../../components/Table/CategoryTable";
+import Breadcrumbs from "../../components/lib/Breadcrumbs";
+import useCategorySubmit from "../../hooks/useCategorySubmit";
+
+const ChildrenCategory = () => {
+  let { id } = useParams();
+  const { getValues, categories, loading } = useCategorySubmit(id);
+
+  return (
+    <>
+      <h1>Sub Category</h1>
+
+      <Breadcrumbs
+        url={"category"}
+        mainTitle={"category"}
+        subTitle={getValues("name")}
+      />
+
+      <div className="overflow-x-auto">
+        <div className="align-middle inline-block min-w-full">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Id
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Description
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Parent Category
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    status
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="bg-white divide-y divide-gray-200">
+                {loading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <CategoryTable
+                    subCategory
+                    categories={
+                      categories?.data[0]?.children?.find(
+                        (item) => item._id === id
+                      ).children
+                    }
+                  />
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ChildrenCategory;
